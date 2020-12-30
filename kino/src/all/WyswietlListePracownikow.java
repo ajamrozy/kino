@@ -5,32 +5,26 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
-
-public class WyswietlListeFilmow extends JFrame {
-
-    WyswietlListeFilmow(){
+public class WyswietlListePracownikow extends JFrame{
+    public WyswietlListePracownikow() {
         Frame frame = new Frame();
+        JButton wyjdz = new JButton("wyjdz");
 
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable(model);
-        model.addColumn("tytul");
-        model.addColumn("gatunek");
-        model.addColumn("rok produkcji");
-        model.addColumn("opis");
-        model.addColumn("godzina");
-        model.addColumn("data");
-
-        File file = new File("filmy.txt");
+        model.addColumn("nickname");
+        model.addColumn("password");
+        model.addColumn("staz");
+        //model.addColumn("dodane filmy"); //tego nie wiem czy bedzie
+        File file = new File("pracownicy.txt");
         try {
             Scanner in = new Scanner(file);
             in.nextLine();
             while (in.hasNext()){
                 String line = in.nextLine();
-                String[] line2 = line.split(",");
-                System.out.println(Arrays.toString(line2));
+                String[] line2 = line.split(" ");
                 model.addRow(line2);
             }
 
@@ -38,12 +32,14 @@ public class WyswietlListeFilmow extends JFrame {
             e.printStackTrace();
         }
         table.setBounds(30, 40, 200, 300);
-        JScrollPane sp = new JScrollPane(table);
-        frame.add(sp);
         frame.setSize(500, 200);
+        JScrollPane sp = new JScrollPane(table);
+        sp.add(wyjdz);
+        frame.add(sp);
         frame.setVisible(true);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); czemu nie dziala
     }
     public static void main(String[] args) {
-        new WyswietlListeFilmow();
+        new WyswietlListePracownikow();
     }
 }

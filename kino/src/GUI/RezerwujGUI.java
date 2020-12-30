@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class RezerwujGUI extends Thread {
     public JPanel panel1;
-    private JButton zakończIPotwierdźButton;
+    private JButton zakonczIPotwierdzButton;
     private JTextField kwotaTx;
     private JButton anulujButton;
     private JTextField rodzaj1Tx;
@@ -17,6 +17,14 @@ public class RezerwujGUI extends Thread {
     private JComboBox comboBox1;
     private JComboBox comboBox2;
     private double suma;
+    public int ileBiletow;
+    private int comb1;
+    private int comb2;
+
+    public void setIleBiletow(int ileBiletow) {
+        this.ileBiletow = ileBiletow;
+    }
+
 
     Bilet biletUlg = new Bilet(10, "ulgowy");
     Bilet biletNorm = new Bilet(15, "normalny");
@@ -27,23 +35,22 @@ public class RezerwujGUI extends Thread {
             comboBox2.addItem(i);
         }
     }
+
     public void refresh(){
-        suma = (comboBox1.getSelectedIndex() * biletUlg.getCena()) + (comboBox2.getSelectedIndex() * biletNorm.getCena());
+        suma = (comboBox1.getSelectedIndex() * biletUlg.getCena()) + (comboBox1.getSelectedIndex() * biletNorm.getCena());
         kwotaTx.setText(String.valueOf(suma));
     }
 
-    public RezerwujGUI() {
+    public RezerwujGUI(int ileBiletow) {
         rodzaj1Tx.setText(biletUlg.getRodzaj());
         rodzaj2Tx.setText(biletNorm.getRodzaj());
         test();
         start();
+        System.out.println(ileBiletow);
 
-
-
-        zakończIPotwierdźButton.addActionListener(new ActionListener() {
+        zakonczIPotwierdzButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
             }
         });
         anulujButton.addActionListener(new ActionListener() {
@@ -52,6 +59,27 @@ public class RezerwujGUI extends Thread {
 
             }
         });
+        comboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                comb1 = comboBox1.getSelectedIndex();
+                sprawdz();
+            }
+        });
+        comboBox2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                comb2 = comboBox2.getSelectedIndex();
+                sprawdz();
+            }
+        });
+        if (ileBiletow == comb1 + comb2)
+            zakonczIPotwierdzButton.setEnabled(true);
+        zakonczIPotwierdzButton.setEnabled(false);
+
+    }
+    public void sprawdz(){
+
     }
     public void run(){
         while (true){
@@ -66,7 +94,8 @@ public class RezerwujGUI extends Thread {
     }
     public static void main(String[] args) {
         JFrame frame = new JFrame("RezerwujGUI");
-        frame.setContentPane(new RezerwujGUI().panel1);
+        SalaKinowaGUI sala = new SalaKinowaGUI();
+        frame.setContentPane(new RezerwujGUI(sala.ileSelected()).panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

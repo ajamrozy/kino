@@ -1,10 +1,10 @@
 package podstawowe;
 
-import all.ListaFilmow;
 
-public class Pracownik extends ListaFilmow {
+public class Pracownik {
     private String nickname;
     private Double staz;
+    private String password;
 
     public String getNickname() {
         return nickname;
@@ -12,6 +12,9 @@ public class Pracownik extends ListaFilmow {
 
     public Double getStaz() {
         return staz;
+    }
+    public String getPassword() {
+        return password;
     }
 
     public String listaDodanychFilmow(){

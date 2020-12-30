@@ -1,6 +1,9 @@
 package GUI;
 
 
+import all.Rezerwuj;
+import all.SalaKinowa;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -122,7 +125,6 @@ public class SalaKinowaGUI {
     }
 
     public SalaKinowaGUI() {
-//        frame =  new JFrame("SalaKinowaGUI");
 //        frame.setContentPane(new SalaKinowaGUI().panel1);
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        frame.pack();
@@ -131,22 +133,27 @@ public class SalaKinowaGUI {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+
+                //frame.dispose();
+                int licznikBiletow = ileSelected();
+                System.out.println(licznikBiletow);
+               // rezerwujGui.setIleBiletow(licznikBiletow);
                 JFrame nowa = new JFrame();
-                nowa.setContentPane(new RezerwujGUI().panel1);
+                RezerwujGUI rezerwujGui = new RezerwujGUI(licznikBiletow);
+                nowa.setContentPane(new RezerwujGUI(licznikBiletow).panel1);
                 nowa.setVisible(true);
                 nowa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 //nowa.setLocationRelativeTo(null);
                 nowa.pack();
-                //frame.dispose();
-                int licznikBiletow = ileSelected();
-                System.out.println(licznikBiletow);
+
             }
         });
         anulujButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 //frame.dispose(); //frame dispose????
-                System.exit(0);
+
+                //System.exit(0);
             }
         });
 //        frame.setSize(100,100);
@@ -161,6 +168,7 @@ public class SalaKinowaGUI {
 
  //      new SalaKinowaGUI();
         JFrame frame = new JFrame("SalaKinowaGUI");
+
         frame.setContentPane(new SalaKinowaGUI().panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
