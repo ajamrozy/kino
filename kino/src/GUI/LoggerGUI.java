@@ -21,8 +21,9 @@ public class LoggerGUI {
         zalogujButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File plik1 = new File("pracownicy.txt");
-                File plik2 = new File("admini.txt");
+                File plik1 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\pracownicy.txt");
+                File plik2 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\admini.txt");
+                File plik3 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\klienci.txt");
                 int check = 0;
                 try {
                     Scanner in1 = new Scanner(plik1);
@@ -42,32 +43,46 @@ public class LoggerGUI {
                 } catch (FileNotFoundException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
                 }
-                if(check == 1) System.out.println("Login successful as employee!");
-                else if(check == 2) System.out.println("Login successful as admin!");
-                else System.out.println("Login or password incorrect!");
-            }
-        });
-
-        zalogujUserButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                File plik = new File("klienci.txt");
-                int check = 0;
                 try {
-                    Scanner in1 = new Scanner(plik);
-                    String dane = textUserLogin.getText() + " " + textUserPassword.getText();
-                    while(in1.hasNextLine()){
-                        if(dane.equals(in1.nextLine())) check = 1;
+                    Scanner in3 = new Scanner(plik3);
+                    String dane = textLogin.getText() + " " + textPassword.getText();
+                    while(in3.hasNextLine()){
+                        if(dane.equals(in3.nextLine())) check = 3;
                     }
                 } catch (FileNotFoundException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
                 }
                 String mess = "";
-                if(check == 1) mess = "Login successful!";
-                else mess = "Login or password incorrect!";
-                String okno = JOptionPane.showInputDialog(mess);
+                if(check == 1){
+                    JOptionPane.showMessageDialog(null, "Login successful as employee!", "Logger", JOptionPane.PLAIN_MESSAGE);
+                    JFrame nowa = new JFrame();
+                    nowa.setContentPane(new PracownikMenuGlGUI().panel1);
+                    nowa.setVisible(true);
+                    nowa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    nowa.pack();
+                }
+                else if(check == 2){
+                    JOptionPane.showMessageDialog(null, "Login successful as admin!", "Logger", JOptionPane.PLAIN_MESSAGE);
+                    JFrame nowa = new JFrame();
+                    nowa.setContentPane(new AdminMenuGUI().panel1);
+                    nowa.setVisible(true);
+                    nowa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    nowa.pack();
+                }
+                else if(check ==3){
+                    JOptionPane.showMessageDialog(null, "Login successful!", "Logger", JOptionPane.PLAIN_MESSAGE);
+                    JFrame nowa = new JFrame();
+                    nowa.setContentPane(new KlientMenuGlGUI().panel1);
+                    nowa.setVisible(true);
+                    nowa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    nowa.pack();
+                }
+                else JOptionPane.showMessageDialog(null, "Login or password incorrect!", "Logger", JOptionPane.PLAIN_MESSAGE);
+
             }
         });
+
+
         stwórzNoweKontoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
