@@ -1,14 +1,10 @@
 package GUI;
 
-
-import all.Rezerwuj;
-import all.SalaKinowa;
-
 import javax.swing.*;
 import java.awt.event.*;
 
 public class SalaKinowaGUI {
- //   private JFrame frame =  new JFrame("SalaKinowaGUI");
+
     private JPanel panel1;
     private JCheckBox miejsce11;
     private JCheckBox miejsce12;
@@ -125,10 +121,6 @@ public class SalaKinowaGUI {
     }
 
     public SalaKinowaGUI() {
-//        frame.setContentPane(new SalaKinowaGUI().panel1);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.pack();
-//        frame.setVisible(true);
         potwierdźButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
