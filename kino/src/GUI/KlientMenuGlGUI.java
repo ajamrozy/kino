@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class KlientMenuGlGUI{
-    private JPanel panel1;
+    public JPanel panel1;
     private JTextField nazwaKlientMenuGlGui;
     private JButton kupBiletButton;
     private JButton wyświetlMojeRezerwacjeButton;

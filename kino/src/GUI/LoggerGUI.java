@@ -1,5 +1,7 @@
 package GUI;
 
+import podstawowe.Film;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,9 +23,12 @@ public class LoggerGUI {
         zalogujButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File plik1 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\pracownicy.txt");
-                File plik2 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\admini.txt");
-                File plik3 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\klienci.txt");
+//                File plik1 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\pracownicy.txt");
+//                File plik2 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\admini.txt");
+//                File plik3 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\klienci.txt");
+                File plik1 = new File("pracownicy.txt");
+                File plik2 = new File("admini.txt");
+                File plik3 = new File("klienci.txt");
                 int check = 0;
                 try {
                     Scanner in1 = new Scanner(plik1);

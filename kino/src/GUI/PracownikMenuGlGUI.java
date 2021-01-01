@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PracownikMenuGlGUI {
-    private JPanel panel1;
+    public JPanel panel1;
     private JTextField nameTx;
     private JButton dodajFilmButton;
     private JButton usuńFilmButton;
