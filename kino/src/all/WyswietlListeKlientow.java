@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class WyswietlListeKlientow {
     public WyswietlListeKlientow() {
-        Frame frame = new Frame();
+        JFrame frame = new JFrame();
         JButton wyjdz = new JButton("wyjdz");
 
         DefaultTableModel model = new DefaultTableModel();
@@ -37,6 +37,7 @@ public class WyswietlListeKlientow {
         sp.add(wyjdz);
         frame.add(sp);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
     public static void main(String[] args) {
         new WyswietlListeKlientow();

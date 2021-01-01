@@ -4,6 +4,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Vector;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -18,13 +22,15 @@ public class SalaKinowa extends Thread{
         ImageIcon imageIcon = new ImageIcon("ekran.png");
         JLabel ekran = new JLabel(imageIcon);
         panel1.add(ekran);
-        ekran.setLocation(250, 10);
+        ekran.setLocation(250, 10); //?
+        
+
         JButton zatwierdz = new JButton("Zatwierdz");
         JButton anuluj = new JButton("Anuluj");
         panel2.add(zatwierdz);
         panel2.add(anuluj);
-        zatwierdz.setLocation(0, 250);
-        anuluj.setLocation(100, 250);
+        zatwierdz.setLocation(250, 0);
+        anuluj.setLocation(250, 100);
 
         DefaultTableModel model = modelTabeli();
         JTable table = new JTable(model);
@@ -35,6 +41,7 @@ public class SalaKinowa extends Thread{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 int test = ileZaznaczonych(model);
+                stanMiejsc(model);
                 System.out.println(test);
             }
         });
@@ -82,6 +89,22 @@ public class SalaKinowa extends Thread{
             }
         }
         return ileSelected;
+    }
+    public void stanMiejsc(DefaultTableModel model){
+        HashMap<ArrayList<Integer>, Boolean> stany = new HashMap<>();
+        for (int i = 0; i < model.getColumnCount(); i++) {
+            for (int j = 0; j < model.getRowCount(); j++) {
+                if (model.getValueAt(j, i).equals(Boolean.TRUE)){
+                    ArrayList<Integer> wspolrzedne = new ArrayList<>();
+                    wspolrzedne.add(i + 1);
+                    wspolrzedne.add(j + 1);
+                    stany.put(wspolrzedne, true);
+                }
+            }
+        }
+        System.out.println(stany);
+
+
     }
 
 

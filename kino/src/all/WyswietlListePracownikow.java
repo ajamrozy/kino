@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class WyswietlListePracownikow extends JFrame{
     public WyswietlListePracownikow() {
-        Frame frame = new Frame();
+        JFrame frame = new JFrame();
         JButton wyjdz = new JButton("wyjdz");
 
         DefaultTableModel model = new DefaultTableModel();
@@ -37,7 +37,7 @@ public class WyswietlListePracownikow extends JFrame{
         sp.add(wyjdz);
         frame.add(sp);
         frame.setVisible(true);
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); czemu nie dziala
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public static void main(String[] args) {
         new WyswietlListePracownikow();

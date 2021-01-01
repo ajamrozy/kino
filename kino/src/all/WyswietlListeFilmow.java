@@ -2,6 +2,7 @@ package all;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,18 +12,16 @@ import java.util.Scanner;
 
 public class WyswietlListeFilmow extends JFrame {
 
-    WyswietlListeFilmow(){
-        Frame frame = new Frame();
-
-        DefaultTableModel model = new DefaultTableModel();
-        JTable table = new JTable(model);
-        model.addColumn("tytul");
-        model.addColumn("gatunek");
-        model.addColumn("rok produkcji");
-        model.addColumn("opis");
-        model.addColumn("godzina");
-        model.addColumn("data");
-
+    public DefaultTableModel modelTabeli(){
+        DefaultTableModel model = new DefaultTableModel(new Object[]{"tytul", "gatunek", "rok produkcji", "opis", "godzina", "data" }, 0) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return JButton.class;
+            }
+            public boolean isCellEditable(int row, int col){
+                return  false;
+            }
+        };
         File file = new File("filmy.txt");
         try {
             Scanner in = new Scanner(file);
@@ -37,12 +36,34 @@ public class WyswietlListeFilmow extends JFrame {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        model.addColumn("przejdź do rezerwacji", new JButton[]{new JButton("test")});
+        return model;
+    }
+
+
+    WyswietlListeFilmow(){
+        final JFrame frame = new JFrame("Wyswietl liste filmow");
+
+
+        JPanel panel1 = new JPanel();
+        frame.add(panel1);
+        DefaultTableModel model = modelTabeli();
+        JTable table = new JTable(model);
+
+        TableCellRenderer tableRenderer;
+        tableRenderer = table.getDefaultRenderer(JButton.class);
+        table.setDefaultRenderer(JButton.class, new RenderJButton(tableRenderer));
+
+
         table.setBounds(30, 40, 200, 300);
         JScrollPane sp = new JScrollPane(table);
         frame.add(sp);
         frame.setSize(500, 200);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
     public static void main(String[] args) {
         new WyswietlListeFilmow();
     }
