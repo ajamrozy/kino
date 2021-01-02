@@ -164,7 +164,7 @@
                       <text value="Możliwe godziny"/>
                     </properties>
                   </component>
-                  <component id="70088" class="javax.swing.JCheckBox" binding="a900CheckBox" default-binding="true">
+                  <component id="70088" class="javax.swing.JCheckBox" binding="godzina9">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -172,7 +172,7 @@
                       <text value="9.00"/>
                     </properties>
                   </component>
-                  <component id="aa223" class="javax.swing.JCheckBox" binding="a1200CheckBox" default-binding="true">
+                  <component id="aa223" class="javax.swing.JCheckBox" binding="godzina12">
                     <constraints>
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -180,7 +180,7 @@
                       <text value="12.00"/>
                     </properties>
                   </component>
-                  <component id="689c5" class="javax.swing.JCheckBox" binding="a1600CheckBox" default-binding="true">
+                  <component id="689c5" class="javax.swing.JCheckBox" binding="godzina16">
                     <constraints>
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -188,7 +188,7 @@
                       <text value="16.00"/>
                     </properties>
                   </component>
-                  <component id="6b6f" class="javax.swing.JCheckBox" binding="a1800CheckBox1" default-binding="true">
+                  <component id="6b6f" class="javax.swing.JCheckBox" binding="godzina18">
                     <constraints>
                       <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -196,7 +196,7 @@
                       <text value="18.00"/>
                     </properties>
                   </component>
-                  <component id="d4b18" class="javax.swing.JCheckBox" binding="a2200CheckBox" default-binding="true">
+                  <component id="d4b18" class="javax.swing.JCheckBox" binding="godzina22">
                     <constraints>
                       <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -204,7 +204,7 @@
                       <text value="22.00"/>
                     </properties>
                   </component>
-                  <component id="9ce21" class="javax.swing.JCheckBox" binding="a2000CheckBox1" default-binding="true">
+                  <component id="9ce21" class="javax.swing.JCheckBox" binding="godzina20">
                     <constraints>
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
