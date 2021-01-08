@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Scanner;
 
-public class LoggerGUI {
+public class LoggerGUI{
+    private JFrame frameLogger;
     private JPanel panel1;
     private JPasswordField textPassword;
     private JTextField textLogin;
@@ -20,15 +21,18 @@ public class LoggerGUI {
     private JButton zalogujUserButton;
 
     public LoggerGUI() {
+        frameLogger = new JFrame("LoggerGUI");
+        frameLogger.add(panel1);
+        frameLogger.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameLogger.pack();
+        frameLogger.setVisible(true);
+
         zalogujButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                File plik1 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\pracownicy.txt");
-//                File plik2 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\admini.txt");
-//                File plik3 = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\klienci.txt");
-                File plik1 = new File("pracownicy.txt");
-                File plik2 = new File("admini.txt");
-                File plik3 = new File("klienci.txt");
+                File plik1 = new File("kino\\src\\dane\\pracownicy.txt");
+                File plik2 = new File("kino\\src\\dane\\admini.txt");
+                File plik3 = new File("kino\\src\\dane\\klienci.txt");
                 int check = 0;
                 try {
                     Scanner in1 = new Scanner(plik1);
@@ -59,28 +63,19 @@ public class LoggerGUI {
                 }
                 String mess = "";
                 if(check == 1){
-                    JOptionPane.showMessageDialog(null, "Login successful as employee!", "Logger", JOptionPane.PLAIN_MESSAGE);
-                    JFrame nowa = new JFrame();
-                    nowa.setContentPane(new PracownikMenuGlGUI().panel1);
-                    nowa.setVisible(true);
-                    nowa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    nowa.pack();
+                    JOptionPane.showMessageDialog(null, "Zalogowano pomyślnie jako pracownik!", "Logger", JOptionPane.PLAIN_MESSAGE);
+                    new PracownikMenuGlGUI();
+                    frameLogger.dispose();
                 }
                 else if(check == 2){
-                    JOptionPane.showMessageDialog(null, "Login successful as admin!", "Logger", JOptionPane.PLAIN_MESSAGE);
-                    JFrame nowa = new JFrame();
-                    nowa.setContentPane(new AdminMenuGUI().panel1);
-                    nowa.setVisible(true);
-                    nowa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    nowa.pack();
+                    JOptionPane.showMessageDialog(null, "Zalogowano pomyślnie jako admin!", "Logger", JOptionPane.PLAIN_MESSAGE);
+                    new AdminMenuGUI();
+                    frameLogger.dispose();
                 }
                 else if(check ==3){
-                    JOptionPane.showMessageDialog(null, "Login successful!", "Logger", JOptionPane.PLAIN_MESSAGE);
-                    JFrame nowa = new JFrame();
-                    nowa.setContentPane(new KlientMenuGlGUI().panel1);
-                    nowa.setVisible(true);
-                    nowa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    nowa.pack();
+                    JOptionPane.showMessageDialog(null, "Zalogowano pomyślnie!", "Logger", JOptionPane.PLAIN_MESSAGE);
+                    new KlientMenuGlGUI();
+                    frameLogger.dispose();
                 }
                 else JOptionPane.showMessageDialog(null, "Login or password incorrect!", "Logger", JOptionPane.PLAIN_MESSAGE);
 
@@ -91,32 +86,17 @@ public class LoggerGUI {
         stwórzNoweKontoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                File plik = new File("C:\\Users\\hp\\IdeaProjects\\kino\\src\\dane\\klienci.txt");
-//                try {
-//                    Writer out = new BufferedWriter(new FileWriter(plik, true));
-//                    String dane = textUserLogin.getText() + " " + textUserPassword.getText();
-//                    out.append("\n"+dane);
-//                    out.close();
-//                    System.out.println("Nowe konto stworzone!");
-//                } catch (FileNotFoundException fileNotFoundException) {
-//                    fileNotFoundException.printStackTrace();
-//                } catch (IOException ioException) {
-//                    ioException.printStackTrace();
-//                }
-                JFrame nowa = new JFrame();
-                nowa.setContentPane(new DodajKlientaGUI().panel1);
-                nowa.setVisible(true);
-                nowa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                nowa.pack();
+                new DodajKlientaGUI();
             }
         });
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("loggerGUI");
-        frame.setContentPane(new LoggerGUI().panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+//        JFrame frame = new JFrame("loggerGUI");
+//        frame.setContentPane(new LoggerGUI().panel1);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.pack();
+//        frame.setVisible(true);
+        new LoggerGUI();
     }
 }

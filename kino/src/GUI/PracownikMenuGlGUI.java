@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PracownikMenuGlGUI {
+    private JFrame framePracownikMenu;
     public JPanel panel1;
     private JTextField nameTx;
     private JButton dodajFilmButton;
@@ -14,12 +15,19 @@ public class PracownikMenuGlGUI {
     private JButton wyświetlListęRezerwacjiButton;
     private JButton wylogujButton;
 
-    Pracownik pracownik = new Pracownik("aaaaa", 13D);
+   // Pracownik pracownik = new Pracownik("aaaaa", 13D);
     public PracownikMenuGlGUI() {
+        framePracownikMenu = new JFrame("PracownikMenuGlGUI");
+        framePracownikMenu.add(panel1);
+        framePracownikMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        framePracownikMenu.pack();
+        framePracownikMenu.setVisible(true);
+
         dodajFilmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                framePracownikMenu.dispose();
+                new DodajFilmGUI();
             }
         });
         usuńFilmButton.addActionListener(new ActionListener() {
@@ -37,18 +45,15 @@ public class PracownikMenuGlGUI {
         wylogujButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                framePracownikMenu.dispose();
+                new LoggerGUI();
             }
         });
 
-        nameTx.setText(pracownik.getNickname());
+   //     nameTx.setText(pracownik.getNickname());
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("PracownikMenuGlGUI");
-        frame.setContentPane(new PracownikMenuGlGUI().panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        new PracownikMenuGlGUI();
     }
 }

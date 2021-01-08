@@ -7,15 +7,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class KlientMenuGlGUI{
+    private JFrame frameKlientMenu;
     public JPanel panel1;
     private JTextField nazwaKlientMenuGlGui;
     private JButton kupBiletButton;
     private JButton wyświetlMojeRezerwacjeButton;
     private JButton wylogujButton;
 
-    Klient klient = new Klient("a", "b", "c", "aaaaaa");
+    Klient klient = new Klient("a", "b", "c", "aaaaaa", "dddd");
 
     public KlientMenuGlGUI() {
+        frameKlientMenu = new JFrame("KlientMenuGUI");
+        frameKlientMenu.add(panel1);
+        frameKlientMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameKlientMenu.pack();
+        frameKlientMenu.setVisible(true);
+
         refresh();
         kupBiletButton.addActionListener(new ActionListener() {
             @Override
@@ -33,6 +40,8 @@ public class KlientMenuGlGUI{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 refresh();
+                frameKlientMenu.dispose();
+                new LoggerGUI();
             }
         });
     }
@@ -41,10 +50,11 @@ public class KlientMenuGlGUI{
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("KlientMenuGlGUI");
-        frame.setContentPane(new KlientMenuGlGUI().panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+//        JFrame frame = new JFrame("KlientMenuGlGUI");
+//        frame.setContentPane(new KlientMenuGlGUI().panel1);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.pack();
+//        frame.setVisible(true);
+        new KlientMenuGlGUI();
     }
 }
