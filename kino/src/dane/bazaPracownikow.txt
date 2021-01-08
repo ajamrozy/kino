@@ -1,0 +1,12 @@
+Imie,Nazwisko,email,Login,Haslo,StartStazu
+Andrzej,Kowalski,email@email,akowalski,haslo123,2021-01-06
+Anna,Nowak,anowak@email,anowak,haslo123,2021-01-08
+Aleksandra,Jakastam,assd@email,ajakas,haslo123,2021-01-08
+xcv,xcv,xcv,xcv,xcv,2021-01-08
+ssss,sss,sss,sss,sss,2021-01-08
+ddd,ddd,ddd,ddd,ddd,2021-01-08
+sdfsdf,sdfsdf,sfdsf,sdfsdf,ddd,2021-01-08
+sdfsdfgg,sdfsdfgg,sfdsfgg,sdfsdfgg,dddgg,2021-01-08
+bbbb,bbbb,bbbb,bbbb,bbbb,2021-01-08
+cccc,cccc,cccc,cccc,cccc,2021-01-08
+xx,xxx,xxx,xxx,xxx,2021-01-08
