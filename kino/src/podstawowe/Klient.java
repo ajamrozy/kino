@@ -6,9 +6,11 @@ public class Klient extends ListaRezerwacji {
     private String imie;
     private String nazwisko;
     private String mail;
+    private String login;
     private String password;
 
     public String getPassword() { return password; }
+    public String getLogin(){return login;}
     public String getImie() {
         return imie;
     }
@@ -22,10 +24,11 @@ public class Klient extends ListaRezerwacji {
         return null;
     }
 
-    public Klient(String imie, String nazwisko, String mail, String password) {
+    public Klient(String imie, String nazwisko, String mail, String login, String password) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.mail = mail;
+        this.login = login;
         this.password = password;
     }
 }
