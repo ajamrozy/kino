@@ -1,3 +1,0 @@
-pracownik1 haslo123
-pracownik2 haslo123
-pracownik3 haslo123

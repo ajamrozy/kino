@@ -1,16 +1,22 @@
 package all;
 
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Vector;
 
 
 public class WyswietlListeFilmow extends JFrame {
+
 
     public DefaultTableModel modelTabeli(){
         DefaultTableModel model = new DefaultTableModel(new Object[]{"tytul", "gatunek", "rok produkcji", "opis", "godzina", "data" }, 0) {
@@ -19,10 +25,11 @@ public class WyswietlListeFilmow extends JFrame {
                 return JButton.class;
             }
             public boolean isCellEditable(int row, int col){
-                return  false;
+                return false;
             }
         };
-        File file = new File("filmy.txt");
+        ArrayList<JButton> test = new ArrayList<>();
+        File file = new File("/home/anita/kino_git/kino/kino/src/dane/filmy.txt");
         try {
             Scanner in = new Scanner(file);
             in.nextLine();
@@ -31,13 +38,27 @@ public class WyswietlListeFilmow extends JFrame {
                 String[] line2 = line.split(",");
                 System.out.println(Arrays.toString(line2));
                 model.addRow(line2);
+                JButton buttonPrzejdzDoSaliKinowej = new JButton(">");
+                ActionListener odnosnikDoSali = new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        new SalaKinowa();
+                    }
+                };
+                buttonPrzejdzDoSaliKinowej.addActionListener(odnosnikDoSali);
+                test.add(buttonPrzejdzDoSaliKinowej);
             }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        Object[] przyciski = test.toArray();
+        model.addColumn("przejdź do rezerwacji", przyciski);
 
-        model.addColumn("przejdź do rezerwacji", new JButton[]{new JButton("test")});
+//        for (int i = 0; i < test.size(); i++) {
+//
+//            test.get(i).addActionListener(actionListener);
+//        }
         return model;
     }
 
@@ -54,6 +75,14 @@ public class WyswietlListeFilmow extends JFrame {
         TableCellRenderer tableRenderer;
         tableRenderer = table.getDefaultRenderer(JButton.class);
         table.setDefaultRenderer(JButton.class, new RenderJButton(tableRenderer));
+
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.out.println("test");
+            }
+        };
+
 
 
         table.setBounds(30, 40, 200, 300);

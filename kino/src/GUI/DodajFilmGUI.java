@@ -48,7 +48,7 @@ public class DodajFilmGUI {
                 System.out.println(ktoreCheckboxWcisniete());
                 ArrayList<String> listaH = ktoreCheckboxWcisniete();
                 if (listaH.size() > 0){
-                    File plik1 = new File("filmy.txt");
+                    File plik1 = new File("/home/anita/kino_git/kino/kino/src/dane/filmy.txt");
                     try {
                         Writer out = new BufferedWriter(new FileWriter(plik1, true));
                         for (int i = 0; i < listaH.size(); i++) {
@@ -61,7 +61,6 @@ public class DodajFilmGUI {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 }
             }
         });
@@ -109,10 +108,6 @@ public class DodajFilmGUI {
 
     public static void main(String[] args) {
         new DodajFilmGUI();
-//        JFrame frame = new JFrame("DodajFilmGUI");
-//        frame.setContentPane(new DodajFilmGUI().panel1);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.pack();
-//        frame.setVisible(true);
+
     }
 }

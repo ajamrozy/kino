@@ -12,7 +12,8 @@ public class WyswietlPracownikow extends JPanel{
     public WyswietlPracownikow() {
 
         String [] kolumny = {"Lp", "Imię", "Nazwisko", "email", "Login", "Haslo", "Start stazu"};
-        File plik = new File("kino\\src\\dane\\bazaPracownikow.txt");
+       // File plik = new File("kino\\src\\dane\\bazaPracownikow.txt");
+        File plik = new File("/home/anita/kino_git/kino/kino/src/dane/bazaPracownikow.txt");
         ArrayList<String[]> lista = new ArrayList<>();
         Scanner in = null;
         try {

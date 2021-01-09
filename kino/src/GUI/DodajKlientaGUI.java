@@ -34,9 +34,12 @@ public class DodajKlientaGUI {
             public void actionPerformed(ActionEvent actionEvent) {
                 Klient nowy = new Klient(nameTxDKG.getText(), nazwiskoTxGKG.getText(), emailTxDKG.getText(), login.getText(), password1.getText());
                 //System.out.println(nowy.toString());
-                File plik1 = new File("kino\\src\\dane\\klienci.txt");
-                File plik2 = new File("kino\\src\\dane\\pracownicy.txt");
-                File plik3 = new File("kino\\src\\dane\\bazaKlientow.txt");
+//                File plik1 = new File("kino\\src\\dane\\klienci.txt");
+//                File plik2 = new File("kino\\src\\dane\\pracownicy.txt");
+//                File plik3 = new File("kino\\src\\dane\\bazaKlientow.txt");
+                File plik1 = new File("/home/anita/kino_git/kino/kino/src/dane/klienci.txt");
+                File plik2 = new File("/home/anita/kino_git/kino/kino/src/dane/pracownicy.txt");
+                File plik3 = new File("/home/anita/kino_git/kino/kino/src/dane/bazaKlientow.txt");
                 int check = 0;
                 try {
                     Scanner in1 = new Scanner(plik1);

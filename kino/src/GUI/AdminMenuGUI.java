@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 public class AdminMenuGUI {
     private JFrame frameAdminMenu;
     public JPanel panel1;
-    private JTextField textField1;
+    private JTextField adminNazwaTx;
     private JButton dodajPracownikaButton;
     private JButton wyświetlListęRezerwacjiButton;
     private JButton wylogujButton;
@@ -21,6 +21,7 @@ public class AdminMenuGUI {
         frameAdminMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameAdminMenu.pack();
         frameAdminMenu.setVisible(true);
+        adminNazwaTx.setText("admin");
 
         dodajPracownikaButton.addActionListener(new ActionListener() {
             @Override

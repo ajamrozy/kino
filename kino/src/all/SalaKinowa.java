@@ -51,7 +51,7 @@ public class SalaKinowa{
     }
 
     public ArrayList<Boolean> wczytajPlikStanMiejsc(){
-        File test = new File("test_siedzen.csv");
+        File test = new File("/home/anita/kino_git/kino/kino/src/dane/test_siedzen.csv");
         ArrayList<String> listaStanuMiejscStr = new ArrayList<>(); //utworzenie listy ktora bedzie rzechowywac liste miejsc wczytana z pliku
         ArrayList<Boolean> listaStanuMiejscBool = new ArrayList<>(); //lista wynikowa na ktorej podstawie bedzie budowany model
         try {

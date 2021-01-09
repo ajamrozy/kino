@@ -1,8 +1,6 @@
 package podstawowe;
 
-import all.ListaRezerwacji;
-
-public class Klient extends ListaRezerwacji {
+public class Klient {
     private String imie;
     private String nazwisko;
     private String mail;

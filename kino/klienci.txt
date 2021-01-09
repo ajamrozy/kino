@@ -1,5 +1,0 @@
-klient1 haslo123
-klient2 haslo123
-klient3 haslo123
-klient4 haslo123
-klient1 haslo123

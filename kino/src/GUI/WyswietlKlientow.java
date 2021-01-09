@@ -13,7 +13,8 @@ public class WyswietlKlientow extends JPanel{
     public WyswietlKlientow() {
 
         String [] kolumny = {"Lp", "Imię", "Nazwisko", "email", "Login", "Haslo"};
-        File plik = new File("kino\\src\\dane\\bazaKlientow.txt");
+       // File plik = new File("kino\\src\\dane\\bazaKlientow.txt");
+        File plik = new File("/home/anita/kino_git/kino/kino/src/dane/bazaKlientow.txt");
         ArrayList<String[]> lista = new ArrayList<>();
         Scanner in = null;
         try {

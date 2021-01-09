@@ -7,7 +7,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static java.lang.Boolean.TRUE;
+
 public class RezerwujGUI extends Thread {
+    public JFrame frame;
     public JPanel panel1;
     private JButton zakonczIPotwierdzButton;
     private JTextField kwotaTx;
@@ -41,7 +44,12 @@ public class RezerwujGUI extends Thread {
         kwotaTx.setText(String.valueOf(suma));
     }
 
-    public RezerwujGUI(int ileBiletow) {
+    public RezerwujGUI() {
+        frame = new JFrame();
+        frame.add(panel1);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
         rodzaj1Tx.setText(biletUlg.getRodzaj());
         rodzaj2Tx.setText(biletNorm.getRodzaj());
         test();
@@ -56,7 +64,7 @@ public class RezerwujGUI extends Thread {
         anulujButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                frame.dispose();
             }
         });
         comboBox1.addActionListener(new ActionListener() {
@@ -73,17 +81,20 @@ public class RezerwujGUI extends Thread {
                 sprawdz();
             }
         });
-        if (ileBiletow == comb1 + comb2)
-            zakonczIPotwierdzButton.setEnabled(true);
-        zakonczIPotwierdzButton.setEnabled(false);
-
     }
     public void sprawdz(){
+        if ((comb2 + comb1) == ileBiletow){
+            zakonczIPotwierdzButton.setEnabled(true);
+        }
+        else
+            zakonczIPotwierdzButton.setEnabled(false);
+
 
     }
     public void run(){
         while (true){
             refresh();
+            sprawdz();
             try {
                 Thread.sleep(200);
 
@@ -93,11 +104,7 @@ public class RezerwujGUI extends Thread {
         }
     }
     public static void main(String[] args) {
-        JFrame frame = new JFrame("RezerwujGUI");
-        SalaKinowaGUI sala = new SalaKinowaGUI();
-        frame.setContentPane(new RezerwujGUI(sala.ileSelected()).panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        new RezerwujGUI();
+
     }
 }

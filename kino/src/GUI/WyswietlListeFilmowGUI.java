@@ -1,11 +1,9 @@
 package GUI;
 
-import all.ListaFilmow;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class WyswietlListeFilmowGUI extends ListaFilmow {
+public class WyswietlListeFilmowGUI {
     private JPanel panel1;
     JTable listaFilmow1;
     Object[][] data1 = {
