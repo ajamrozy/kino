@@ -48,11 +48,12 @@ public class DodajFilmGUI {
                 System.out.println(ktoreCheckboxWcisniete());
                 ArrayList<String> listaH = ktoreCheckboxWcisniete();
                 if (listaH.size() > 0){
-                    File plik1 = new File("/home/anita/kino_git/kino/kino/src/dane/filmy.txt");
+                    File plik1 = new File("filmy.txt");
                     try {
                         Writer out = new BufferedWriter(new FileWriter(plik1, true));
                         for (int i = 0; i < listaH.size(); i++) {
                             String dane = nameFilmTx.getText() + ", " + gatunekTx.getText() + ", " + rokProdukcjiTx.getText() + ", " + opisTx.getText() + ", " + listaH.get(i) + ", " + comboBox1.getSelectedItem();
+                            generujSale(i);
                             out.append("\n"+dane);
                         }
                         out.close();
@@ -61,6 +62,7 @@ public class DodajFilmGUI {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 }
             }
         });
@@ -78,6 +80,39 @@ public class DodajFilmGUI {
         comboBox1.addItem(fourDays);
         comboBox1.addItem(fiveDays);
         comboBox1.addItem(sixDays);
+    }
+    private static void copyFileUsingStream(File source, File dest) throws IOException {
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(source);
+            os = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+        } finally {
+            is.close();
+            os.close();
+        }
+    }
+    public void generujSale(int i){
+        try {
+            String fileName = nameFilmTx.getText() + comboBox1.getSelectedItem() + ktoreCheckboxWcisniete().get(i) + ".txt";
+            File myObj = new File(fileName);
+            File template = new File("template.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+                copyFileUsingStream(template, myObj);
+            } else {
+                System.out.println("File already exists.");
+            }
+
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<String> ktoreCheckboxWcisniete(){

@@ -32,9 +32,17 @@ public class DodajPracownikaGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Pracownik nowy = new Pracownik(nameTxDKG.getText(), nazwiskoTxGKG.getText(), emailTxDKG.getText(), login.getText(), password1.getText(), LocalDate.now());
-                File plik1 = new File("kino\\src\\dane\\pracownicy.txt");
-                File plik2 = new File("kino\\src\\dane\\klienci.txt");
-                File plik3 = new File("kino\\src\\dane\\bazaPracownikow.txt");
+//                File plik1 = new File("kino\\src\\dane\\pracownicy.txt");
+//                File plik2 = new File("kino\\src\\dane\\klienci.txt");
+//                File plik3 = new File("kino\\src\\dane\\bazaPracownikow.txt");
+//                File plik1 = new File("/home/anita/kino_git/kino/kino/src/dane/pracownicy.txt");
+//                File plik2 = new File("/home/anita/kino_git/kino/kino/src/dane/klienci.txt");
+//                File plik3 = new File("/home/anita/kino_git/kino/kino/src/dane/bazaPracownikow.txt");
+                File directory = new File("dane");
+                directory.mkdir();
+                File plik1 = new File(directory, "pracownicy.txt");
+                File plik2 = new File(directory,"klienci.txt");
+                File plik3 = new File(directory,"bazaPracownikow.txt");
                 int check = 0;
                 try {
                     Scanner in1 = new Scanner(plik1);

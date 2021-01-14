@@ -1,10 +1,7 @@
 package all;
 
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -12,41 +9,34 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Vector;
 
 
-public class WyswietlListeFilmow extends JFrame {
+public class WyswietlListeFilmow extends  Thread{
 
+    JTable table;
 
     public DefaultTableModel modelTabeli(){
         DefaultTableModel model = new DefaultTableModel(new Object[]{"tytul", "gatunek", "rok produkcji", "opis", "godzina", "data" }, 0) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                return JButton.class;
+                if (columnIndex == 6)
+                    return Boolean.class;
+                return String.class;
             }
             public boolean isCellEditable(int row, int col){
-                return false;
+                return col == 6;
             }
         };
-        ArrayList<JButton> test = new ArrayList<>();
-        File file = new File("/home/anita/kino_git/kino/kino/src/dane/filmy.txt");
+        ArrayList<Boolean> test = new ArrayList<>();
+        File file = new File("filmy.txt");
         try {
             Scanner in = new Scanner(file);
             in.nextLine();
             while (in.hasNext()){
                 String line = in.nextLine();
                 String[] line2 = line.split(",");
-                System.out.println(Arrays.toString(line2));
                 model.addRow(line2);
-                JButton buttonPrzejdzDoSaliKinowej = new JButton(">");
-                ActionListener odnosnikDoSali = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        new SalaKinowa();
-                    }
-                };
-                buttonPrzejdzDoSaliKinowej.addActionListener(odnosnikDoSali);
-                test.add(buttonPrzejdzDoSaliKinowej);
+
             }
 
         } catch (FileNotFoundException e) {
@@ -55,42 +45,130 @@ public class WyswietlListeFilmow extends JFrame {
         Object[] przyciski = test.toArray();
         model.addColumn("przejdź do rezerwacji", przyciski);
 
-//        for (int i = 0; i < test.size(); i++) {
-//
-//            test.get(i).addActionListener(actionListener);
-//        }
         return model;
+    }
+
+    public ArrayList<ArrayList<String>> daneDoOtwarciaSaliKin() {
+        ArrayList<ArrayList<String>> przechowywanieDanychDoSaliKin = new ArrayList<>();
+        File file = new File("filmy.txt");
+        try {
+            Scanner in = new Scanner(file);
+            in.nextLine();
+            while (in.hasNext()) {
+                ArrayList<String> pomocnicza = new ArrayList<>();
+                String line = in.nextLine();
+                String[] line2 = line.split(",");
+                pomocnicza.add(line2[0]);
+                pomocnicza.add(line2[4]);
+                pomocnicza.add(line2[5]);
+                przechowywanieDanychDoSaliKin.add(pomocnicza);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return przechowywanieDanychDoSaliKin;
     }
 
 
     WyswietlListeFilmow(){
-        final JFrame frame = new JFrame("Wyswietl liste filmow");
+        //naprawic wyswietlanie
+        final JFrame frame = new JFrame(); //frame
 
+        // JPanel panel0 = new JPanel();       // panel macierzysy
+        JPanel panel1 = new JPanel();       //panel zawierajacy tabele i ekran
+        JPanel panel2 = new JPanel();       //panel zawierajacy przyciski
 
-        JPanel panel1 = new JPanel();
+        JButton zatwierdz = new JButton("Zatwierdz"); //przyciski
+        JButton anulujWybor = new JButton("Anuluj wybor");
+        JButton wyjdz = new JButton("wyjdz");
+
+        DefaultTableModel model = modelTabeli(); //tabela
+        table = new JTable(model);
+
+        JScrollPane sp = new JScrollPane(table); //scroll panel
+
+        //frame.add(sp);
+        panel1.add(sp);
+        panel2.add(zatwierdz);
+        panel2.add(anulujWybor);
+        panel2.add(wyjdz);
+
+        frame.add(panel2);
         frame.add(panel1);
-        DefaultTableModel model = modelTabeli();
-        JTable table = new JTable(model);
 
-        TableCellRenderer tableRenderer;
-        tableRenderer = table.getDefaultRenderer(JButton.class);
-        table.setDefaultRenderer(JButton.class, new RenderJButton(tableRenderer));
+        ArrayList<ArrayList<String>> przechowywanieDanychDoSaliKin = daneDoOtwarciaSaliKin();
 
-        ActionListener actionListener = new ActionListener() {
+
+        zatwierdz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("test");
+                int czyszczenie = table.getSelectedRow();
+                String nazwaPliku;
+                ArrayList<String> wybrany = przechowywanieDanychDoSaliKin.get(czyszczenie);
+                String nazwaFilmu = wybrany.get(0);
+                String godzinaFilmu = wybrany.get(1);
+                String dataFilmu = wybrany.get(2);
+                nazwaPliku = nazwaFilmu +  dataFilmu + godzinaFilmu + ".txt";
+                nazwaPliku = nazwaPliku.replaceAll("\\s+", "");
+                System.out.println(nazwaPliku);
+                new SalaKinowa(nazwaPliku);
+                frame.dispose();
             }
-        };
+        });
+        anulujWybor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                int czyszczenie = table.getSelectedRow();
+                table.setValueAt(Boolean.FALSE, czyszczenie, 6);
+                table.setEnabled(true);
+            }
+        });
+        wyjdz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                frame.dispose();
+            }
+        });
 
+        start();
+        frame.setSize(500, 400);
+        panel1.setSize(500, 50);
+        panel2.setSize(500, 100);
+//        sp.setLocation(0,51);
+//        sp.setSize(500, 700);
 
+        table.setBounds(0, 0, 500, 50);
+        //sp.setBounds(0,0,50,50);
+        panel1.setLocation(0,0);
+        panel2.setLocation(0, 301);
+        anulujWybor.setLocation(0, 301);
+        zatwierdz.setLocation(100, 301);
 
-        table.setBounds(30, 40, 200, 300);
-        JScrollPane sp = new JScrollPane(table);
-        frame.add(sp);
+        panel2.setVisible(true);
         frame.setSize(500, 200);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    public  void  refresh(JTable table){
+        ArrayList<Object> warunek = new ArrayList<>();
+        for (int i = 0; i < table.getRowCount(); i++) {
+            warunek.add(table.getValueAt(i, 6));
+        }
+        if (warunek.contains(Boolean.TRUE)){
+            table.setEnabled(false);
+        }
+
+    }
+    public void run(){
+        while (true){
+            refresh(table);
+            try {
+                Thread.sleep(100);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void main(String[] args) {
