@@ -191,7 +191,6 @@ public class SalaKinowa {
 
     public void wpiszDoPlikuStanMiejsc(ArrayList<ArrayList<String>> stanMiejscZmienione) {
         try {
-            // input the file content to the StringBuffer "input"
             File file = new File(filename);
             Scanner input = new Scanner(file);
             ArrayList<String[]> listaStanuMiejscStr = new ArrayList<>();
@@ -203,9 +202,7 @@ public class SalaKinowa {
                 listaStanuMiejscStr.add(line2);
             }
             input.close();
-            // display the original file for debugging
 
-            // logic to replace lines in the string (could use regex here to be generic)
             for (ArrayList<String> testZmienna : stanMiejscZmienione) {
                 String tymczasowyX = testZmienna.get(0);
                 String tymczasowyY = testZmienna.get(1);
