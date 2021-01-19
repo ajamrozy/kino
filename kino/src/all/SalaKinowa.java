@@ -64,10 +64,7 @@ public class SalaKinowa {
                 frame.dispose();
             }
         });
-        //NIC TU NIE DZIALA JAK NALEZY
-        //add
 
-//        panel0.add(panel1);
         panel1.add(ekran);
         panel1.add(sp);
 
@@ -84,8 +81,6 @@ public class SalaKinowa {
         frame.setSize(500, 400);
         panel1.setSize(500, 50);
         panel2.setSize(500, 100);
-//        sp.setLocation(0,51);
-//        sp.setSize(500, 700);
 
         table.setBounds(0, 0, 500, 50);
         //sp.setBounds(0,0,50,50);
@@ -96,21 +91,14 @@ public class SalaKinowa {
         frame.setResizable(false);
 
 
-//        System.out.println(panel2.getLocation());
-//        System.out.println(anuluj.getLocation());
-//        System.out.println();
-        //table.setLocation(100, 300);
-//        panel2.setLocation(0, 0);
-
-
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //zle wyswietlanie
     }
 
 
 
+    //metoda, ktora wczytuje liste miejsc i na tej podstawie buduje tabele Checkboxow na ekranie oraz blokuje miejsca juz wczesniej zajęte.
     public DefaultTableModel modelTabeli(){
         ArrayList<Boolean> listaMiejscDoModelu = wczytajPlikStanMiejsc(); //pobranie listy miejsc z funkcji wczytajPlikStanMiejsc
         DefaultTableModel model = new DefaultTableModel(new Object[]{"kolumna 1", "kolumna2", "kolumna3",  "kolumna4", "kolumna5", "kolumna6", "kolumna7", "kolumna8"}, 0) {
@@ -118,11 +106,13 @@ public class SalaKinowa {
             public Class<?> getColumnClass(int columnIndex) {
                 return Boolean.class;
             }
-            public boolean isCellEditable(int row, int column) {
-                return Boolean.FALSE == listaMiejscDoModelu.get(row + column);
+            public boolean isCellEditable(int row, int column) { //metoda ktora korzysta z doBlokady. Blokuje miejsca wczytane z pliku i nie pozwala na ich odznaczenie przez kolejnego uzytkownika
+                ArrayList<ArrayList<Boolean>> listaDoBlokady = doBlokady();
+                ArrayList<Boolean> row1 = listaDoBlokady.get(row);
+                return !row1.get(column);
             }
         };
-        System.out.println(listaMiejscDoModelu);
+
         int iterator = 0;  //budowa modelu na podstawie listy stanu miejsc
         while (iterator < 80){
             ArrayList<Boolean> rzadLista = new ArrayList<>();
@@ -132,20 +122,37 @@ public class SalaKinowa {
             model.addRow(rzadLista.toArray());
             iterator += 8;
         }
-
-//        for (int index = 0; index < 10; index++) {
-//            model.addRow(new Object[]{Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE,Boolean.FALSE});
-//        }
-
         return model;
     }
 
+
+    //metoda pomocnicza do metody wczytajPlikStanMiejsc. Pozwala na wymienienie String na Boolean
     public Boolean zwracaBooleanDoListyStanuMiejsc(String zmiennaZPliku){
         if (zmiennaZPliku.equals("FALSE"))
             return Boolean.FALSE;
         return Boolean.TRUE;
     }
 
+
+    //metoda wywolywana przez modelTabeli. Zwraca odpowiedni typ danych, który łatwo jest wywoływany przez isCellEditable
+    public ArrayList<ArrayList<Boolean>> doBlokady(){
+        ArrayList<Boolean> listaMiejscDoModelu = wczytajPlikStanMiejsc();
+        ArrayList<ArrayList<Boolean>> listaMiejscDoBlokady = new ArrayList<>();
+        int iterator = 0;  //budowa modelu na podstawie listy stanu miejsc
+        while (iterator < 80){
+            ArrayList<Boolean> rzadLista = new ArrayList<>();
+            for (int i = 0; i < 8; i++) {
+                rzadLista.add(listaMiejscDoModelu.get(i + iterator));
+            }
+            listaMiejscDoBlokady.add(rzadLista);
+            iterator += 8;
+        }
+        return listaMiejscDoBlokady;
+    }
+
+
+    //najważniejsza metoda ktora wczytuje podany plik i na tej podstawie zwraca listę,
+    //którą wykorzystuje modelTabeli zaznaczając i blokując już zajęte przez kogos miejsca
     public ArrayList<Boolean> wczytajPlikStanMiejsc(){
         File test = new File(filename);
         ArrayList<String> listaStanuMiejscStr = new ArrayList<>(); //utworzenie listy ktora bedzie rzechowywac liste miejsc wczytana z pliku
@@ -162,12 +169,16 @@ public class SalaKinowa {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        for (String znaki : listaStanuMiejscStr){
+        for (String znaki : listaStanuMiejscStr){ //wywolanie zwracaBooleanDoListyMiejsc
             Boolean noweZnaki = zwracaBooleanDoListyStanuMiejsc(znaki);
             listaStanuMiejscBool.add(noweZnaki);
         }
         return listaStanuMiejscBool;
     }
+
+
+    //wczytuje ilość zaznaczonych miejsc na początkowego otworzenia pliku.
+    //Wynik wykorzystuje sie w celu wyliczenia ile miejsc zaznaczył obecny użytkownik
     public int wczytajIleZaznaczonych(){
         File test = new File(filename);
         int wczytanoIleZazn = 0;
@@ -188,7 +199,8 @@ public class SalaKinowa {
     }
 
 
-
+    //druga najważniejsza klasa. Nadpisuje plik, aby kolejny użytkownik zobaczył nową salę kinową z zarezerwowanymi przez kogoś miejscami.
+    //Miejsca na dany film nie mogą zostać wybrane ponownie
     public void wpiszDoPlikuStanMiejsc(ArrayList<ArrayList<String>> stanMiejscZmienione) {
         try {
             File file = new File(filename);
@@ -236,6 +248,8 @@ public class SalaKinowa {
         }
     }
 
+    //wczytuje ile miejsc zostalo zajętych przez obecnego użytkownika.
+    //Na tej podstawie wyliczana i przekazywana dalej jest liczba biletów które musi kupić
     public ArrayList<ArrayList<String>> stanMiejscZm(DefaultTableModel modelTable) {
         ArrayList<ArrayList<String>> miejscaZajete = new ArrayList<>();
         for (int i = 0; i < modelTable.getColumnCount(); i++) {
