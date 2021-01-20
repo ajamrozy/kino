@@ -19,7 +19,7 @@ public class WyswietlPracownikow extends JPanel{
         frame = new JFrame("Baza pracowników");
 
         String [] kolumny = {"Lp", "Imię", "Nazwisko", "email", "Login", "Haslo", "Start stazu"};
-        File plik = new File("kino\\src\\dane\\bazaPracownikow.txt");
+        File plik = new File("src\\dane\\bazaPracownikow.txt");
 //        File plik = new File("/home/anita/kino_git/kino/kino/src/dane/bazaPracownikow.txt");
         ArrayList<String[]> lista = new ArrayList<>();
         Scanner in = null;
@@ -64,10 +64,17 @@ public class WyswietlPracownikow extends JPanel{
         });
 
         JPanel btnPnl = new JPanel(new BorderLayout());
+        JPanel bottom = new JPanel();
+        JLabel label1 = new JLabel();
+        JLabel label2 = new JLabel();
+
         btnPnl.add(wyjdz, BorderLayout.CENTER);
+        bottom.add(label1, BorderLayout.WEST);
+        bottom.add(btnPnl, BorderLayout.CENTER);
+        bottom.add(label2, BorderLayout.EAST);
 
         frame.add(scroll, BorderLayout.CENTER);
-        frame.add(btnPnl, BorderLayout.SOUTH);
+        frame.add(bottom, BorderLayout.SOUTH);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
