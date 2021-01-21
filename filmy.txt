@@ -1,7 +1,0 @@
-tytuł, gatunek, rok produkcji, opis, godzina, data
-NIB, komedia, 2000, kjkjkjkj, 9, 2021-01-15
-NIB, komedia, 2000, kjkjkjkj, 12, 2021-01-15
-kkkk, lll, 1234, pppp, 9, 2021-01-16
-kkkk, lll, 1234, pppp, 16, 2021-01-16
-sss, ssss, 111, sssss, 9, 2021-01-15
-sss, ssss, 111, sssss, 12, 2021-01-15
