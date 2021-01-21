@@ -1,7 +1,10 @@
 package all;
 
+import GUI.KlientMenuGlGUI;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -28,7 +31,7 @@ public class WyswietlListeFilmow extends  Thread{
             }
         };
         ArrayList<Boolean> test = new ArrayList<>();
-        File file = new File("filmy.txt");
+        File file = new File("src\\dane\\filmy.txt");
         try {
             Scanner in = new Scanner(file);
             in.nextLine();
@@ -50,7 +53,7 @@ public class WyswietlListeFilmow extends  Thread{
 
     public ArrayList<ArrayList<String>> daneDoOtwarciaSaliKin() {
         ArrayList<ArrayList<String>> przechowywanieDanychDoSaliKin = new ArrayList<>();
-        File file = new File("filmy.txt");
+        File file = new File("src\\dane\\filmy.txt");
         try {
             Scanner in = new Scanner(file);
             in.nextLine();
@@ -70,31 +73,37 @@ public class WyswietlListeFilmow extends  Thread{
     }
 
 
-    WyswietlListeFilmow(){
+    public WyswietlListeFilmow(){
         //naprawic wyswietlanie
         final JFrame frame = new JFrame(); //frame
 
         // JPanel panel0 = new JPanel();       // panel macierzysy
         JPanel panel1 = new JPanel();       //panel zawierajacy tabele i ekran
-        JPanel panel2 = new JPanel();       //panel zawierajacy przyciski
+        JPanel panel2 = new JPanel(new BorderLayout());       //panel zawierajacy przyciski
 
         JButton zatwierdz = new JButton("Zatwierdz"); //przyciski
         JButton anulujWybor = new JButton("Anuluj wybor");
-        JButton wyjdz = new JButton("wyjdz");
+        JButton wyjdz = new JButton("Wyjdz");
 
         DefaultTableModel model = modelTabeli(); //tabela
         table = new JTable(model);
 
         JScrollPane sp = new JScrollPane(table); //scroll panel
 
-        //frame.add(sp);
-        panel1.add(sp);
-        panel2.add(zatwierdz);
-        panel2.add(anulujWybor);
-        panel2.add(wyjdz);
+        panel2.add(zatwierdz, BorderLayout.WEST);
+        panel2.add(anulujWybor, BorderLayout.CENTER);
+        panel2.add(wyjdz, BorderLayout.EAST);
 
-        frame.add(panel2);
-        frame.add(panel1);
+        JLabel label1 = new JLabel();
+        JLabel label2 = new JLabel();
+
+        panel1.add(label1, BorderLayout.WEST);
+        panel1.add(panel2, BorderLayout.CENTER);
+        panel1.add(label2, BorderLayout.EAST);
+
+        frame.add(sp, BorderLayout.CENTER);
+        frame.add(panel1, BorderLayout.SOUTH);
+
 
         ArrayList<ArrayList<String>> przechowywanieDanychDoSaliKin = daneDoOtwarciaSaliKin();
 
@@ -111,7 +120,7 @@ public class WyswietlListeFilmow extends  Thread{
                 nazwaPliku = nazwaFilmu +  dataFilmu + godzinaFilmu + ".txt";
                 nazwaPliku = nazwaPliku.replaceAll("\\s+", "");
                 System.out.println(nazwaPliku);
-                new SalaKinowa(nazwaPliku);
+                new SalaKinowa("src\\dane\\filmy_sale\\"+nazwaPliku);
                 frame.dispose();
             }
         });
@@ -126,6 +135,7 @@ public class WyswietlListeFilmow extends  Thread{
         wyjdz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                new KlientMenuGlGUI();
                 frame.dispose();
             }
         });

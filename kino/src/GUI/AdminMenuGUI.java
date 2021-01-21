@@ -1,5 +1,8 @@
 package GUI;
 
+import all.WyswietlKlientow;
+import all.WyswietlPracownikow;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +36,7 @@ public class AdminMenuGUI {
         usuńPracownikaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new UsunPracownika();
             }
         });
         wyświetlListęRezerwacjiButton.addActionListener(new ActionListener() {
@@ -45,13 +48,15 @@ public class AdminMenuGUI {
         wyświetlBazęDanychPracownikówButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new WyswietlPracownikow();
+                frameAdminMenu.dispose();
             }
         });
         wyświetlBazęDanychKlientówButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new WyswietlKlientow();
+                frameAdminMenu.dispose();
             }
         });
         wylogujButton.addActionListener(new ActionListener() {
