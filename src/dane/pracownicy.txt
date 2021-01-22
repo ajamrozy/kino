@@ -1,8 +1,3 @@
-pracownik1 haslo123
-pracownik2 haslo123
-pracownik3 haslo123
-pracownik4 haslo123
-pracownik11 haslo123
 akowalski haslo123
 anowak haslo123
 ajakas haslo123
@@ -10,3 +5,5 @@ xcv xcv
 ddd ddd
 sdfsdfgg dddgg
 bbbb bbbb
+wkulicka haslo123
+jkowalik haslo123

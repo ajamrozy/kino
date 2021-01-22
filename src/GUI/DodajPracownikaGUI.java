@@ -32,12 +32,13 @@ public class DodajPracownikaGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Pracownik nowy = new Pracownik(nameTxDKG.getText(), nazwiskoTxGKG.getText(), emailTxDKG.getText(), login.getText(), password1.getText(), LocalDate.now());
-                File plik1 = new File("kino\\src\\dane\\pracownicy.txt");
-                File plik2 = new File("kino\\src\\dane\\klienci.txt");
-                File plik3 = new File("kino\\src\\dane\\bazaPracownikow.txt");
+                File plik1 = new File("src\\dane\\pracownicy.txt");
+                File plik2 = new File("src\\dane\\klienci.txt");
+                File plik3 = new File("src\\dane\\bazaPracownikow.txt");
 //                File plik1 = new File("/home/anita/kino_git/kino/kino/src/dane/pracownicy.txt");
 //                File plik2 = new File("/home/anita/kino_git/kino/kino/src/dane/klienci.txt");
 //                File plik3 = new File("/home/anita/kino_git/kino/kino/src/dane/bazaPracownikow.txt");
+
                 if (!nameTxDKG.getText().equals("") && !nazwiskoTxGKG.getText().equals("") && !emailTxDKG.getText().equals("") && !login.getText().equals("") && !password1.getText().equals("")) {
                     int check = 0;
                     try {
@@ -70,6 +71,8 @@ public class DodajPracownikaGUI {
                             Writer out2 = new BufferedWriter(new FileWriter(plik3, true));
                             out2.append("\n" + nowy.getImie() + "," + nowy.getNazwisko() + "," + nowy.getMail() + "," + nowy.getLogin() + "," + nowy.getPassword() + "," + nowy.getStartStazu());
                             out2.close();
+                            frameDodajPracownika.dispose();
+                            new AdminMenuGUI();
                         } catch (FileNotFoundException fileNotFoundException) {
                             fileNotFoundException.printStackTrace();
                         } catch (IOException ioException) {

@@ -6,9 +6,8 @@ import podstawowe.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,6 +29,8 @@ public class RezerwujGUI extends Thread {
     private int comb2;
     ArrayList<ArrayList<String>> zaznaczone1;
     String filename;
+    public String login;
+    public ArrayList<String> daneFilmu;
 
     public void setIleBiletow(int ileBiletow) {
         this.ileBiletow = ileBiletow;
@@ -51,9 +52,11 @@ public class RezerwujGUI extends Thread {
         kwotaTx.setText(String.valueOf(suma));
     }
 
-    public RezerwujGUI(ArrayList<ArrayList<String>> zaznaczone, String fileName) {
+    public RezerwujGUI(ArrayList<ArrayList<String>> zaznaczone, String fileName, String login, ArrayList<String> daneFilmu) {
+        this.daneFilmu = daneFilmu;
         this.zaznaczone1 = zaznaczone;
         this.filename = fileName;
+        this.login = login;
         frame = new JFrame();
         frame.add(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,6 +67,7 @@ public class RezerwujGUI extends Thread {
         test();
         start();
         //System.out.println(ileBiletow);
+        //System.out.println(login);
 
         zakonczIPotwierdzButton.addActionListener(new ActionListener() {
             @Override
@@ -75,6 +79,17 @@ public class RezerwujGUI extends Thread {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+                File plik1 = new File("src\\dane\\rezerwacje.txt");
+                try {
+                    Writer out = new BufferedWriter(new FileWriter(plik1, true));
+                    out.append("\n" + login + "," + daneFilmu.get(0) + "," + daneFilmu.get(1) + "," + daneFilmu.get(2) + "," + ileBiletow + "," + LocalDate.now());
+                    out.close();
+                    JOptionPane.showMessageDialog(null, "Rezerwacja przebiegła pomyślnie!", "Rezerwacja", JOptionPane.PLAIN_MESSAGE);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
         anulujButton.addActionListener(new ActionListener() {
@@ -121,7 +136,9 @@ public class RezerwujGUI extends Thread {
                 listaStanuMiejscStr.add(line2);
             }
             input.close();
+            // display the original file for debugging
 
+            // logic to replace lines in the string (could use regex here to be generic)
             for (ArrayList<String> testZmienna : stanMiejscZmienione) {
                 String tymczasowyX = testZmienna.get(0);
                 String tymczasowyY = testZmienna.get(1);
@@ -169,7 +186,11 @@ public class RezerwujGUI extends Thread {
     public static void main(String[] args) {
         String test = "test_siedzen.txt";
         ArrayList<ArrayList<String>> test1 = new ArrayList<>();
-        new RezerwujGUI(test1, test);
+        ArrayList<String> daneFilmu = new ArrayList<String>();
+        daneFilmu.add("test");
+        daneFilmu.add("test");
+        daneFilmu.add("test");
+        new RezerwujGUI(test1, test, "test", daneFilmu);
 
     }
 }

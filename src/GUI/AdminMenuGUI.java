@@ -2,6 +2,7 @@ package GUI;
 
 import all.WyswietlKlientow;
 import all.WyswietlPracownikow;
+import all.WyswietlRezerwacje;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -36,7 +37,8 @@ public class AdminMenuGUI {
         wyświetlListęRezerwacjiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new WyswietlRezerwacje("admin");
+                frameAdminMenu.dispose();
             }
         });
         wyświetlBazęDanychPracownikówButton.addActionListener(new ActionListener() {

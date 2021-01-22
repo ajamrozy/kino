@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class WyswietlPracownikow extends Thread{
@@ -155,6 +156,7 @@ public class WyswietlPracownikow extends Thread{
                 dane[i][j] = lista.get(i)[j-1];
             }
         }
+        System.out.println(Arrays.deepToString(dane));
 
         DefaultTableModel model = new DefaultTableModel(dane, kolumny);
         Object[] check = new Object[lista.size()];

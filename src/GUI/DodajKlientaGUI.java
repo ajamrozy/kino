@@ -20,6 +20,7 @@ public class DodajKlientaGUI {
     private JButton zatwierdźButton;
     private JTextField login;
 
+    //Klient klient = new Klient("a", "b", "c", "aaaaaa");
 
     public DodajKlientaGUI() {
         frameDodajKlienta = new JFrame("DodajKlientaGUI");
@@ -32,14 +33,13 @@ public class DodajKlientaGUI {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Klient nowy = new Klient(nameTxDKG.getText(), nazwiskoTxGKG.getText(), emailTxDKG.getText(), login.getText(), password1.getText());
-
+                //System.out.println(nowy.toString());
                 File plik1 = new File("src\\dane\\klienci.txt");
                 File plik2 = new File("src\\dane\\pracownicy.txt");
                 File plik3 = new File("src\\dane\\bazaKlientow.txt");
-//                File plik1 = new File("src//dane//klienci.txt");
-//                File plik2 = new File("src//dane//pracownicy.txt");
-//                File plik3 = new File("src//dane//bazaKlientow.txt");
-
+//                File plik1 = new File("/home/anita/kino_git/kino/kino/src/dane/klienci.txt");
+//                File plik2 = new File("/home/anita/kino_git/kino/kino/src/dane/pracownicy.txt");
+//                File plik3 = new File("/home/anita/kino_git/kino/kino/src/dane/bazaKlientow.txt");
                 if (!nameTxDKG.getText().equals("") && !nazwiskoTxGKG.getText().equals("") && !emailTxDKG.getText().equals("") && !login.getText().equals("") && !password1.getText().equals("")) {
                     int check = 0;
                     try {
@@ -94,7 +94,16 @@ public class DodajKlientaGUI {
         });
     }
 
+
+
+
+
     public static void main(String[] args) {
+//        JFrame frame = new JFrame("DodajKlientaGUI");
+//        frame.setContentPane(new DodajKlientaGUI().panel1);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.pack();
+//        frame.setVisible(true);
         new DodajKlientaGUI();
 
     }

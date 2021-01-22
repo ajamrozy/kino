@@ -1,5 +1,6 @@
 package GUI;
 
+import all.WyswietlRezerwacje;
 import podstawowe.*;
 
 import javax.swing.*;
@@ -14,15 +15,15 @@ public class PracownikMenuGlGUI {
     private JButton usuńFilmButton;
     private JButton wyświetlListęRezerwacjiButton;
     private JButton wylogujButton;
-    String login;
+    public String login;
 
+   // Pracownik pracownik = new Pracownik("aaaaa", 13D);
     public PracownikMenuGlGUI(String login) {
         framePracownikMenu = new JFrame("PracownikMenuGlGUI");
         framePracownikMenu.add(panel1);
         framePracownikMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         framePracownikMenu.pack();
         framePracownikMenu.setVisible(true);
-
         this.login = login;
         nameTx.setText(login);
 
@@ -42,7 +43,8 @@ public class PracownikMenuGlGUI {
         wyświetlListęRezerwacjiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                new WyswietlRezerwacje(login);
+                framePracownikMenu.dispose();
             }
         });
         wylogujButton.addActionListener(new ActionListener() {

@@ -1,11 +1,3 @@
-klient1 haslo123
-klient2 haslo123
-klient3 haslo123
-klient4 haslo123
-klient5 haslo123
-klient6 haslo123
-klient7 haslo123
 akowalska haslo123
 akowal haslo123
 nurbanek Haslo123
- 

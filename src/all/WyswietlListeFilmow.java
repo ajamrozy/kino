@@ -17,6 +17,7 @@ import java.util.Scanner;
 public class WyswietlListeFilmow extends  Thread{
 
     JTable table;
+    public String login;
 
     public DefaultTableModel modelTabeli(){
         DefaultTableModel model = new DefaultTableModel(new Object[]{"tytul", "gatunek", "rok produkcji", "opis", "godzina", "data" }, 0) {
@@ -31,8 +32,7 @@ public class WyswietlListeFilmow extends  Thread{
             }
         };
         ArrayList<Boolean> test = new ArrayList<>();
-//        File file = new File("src\\dane\\filmy.txt");
-        File file = new File("src/dane/filmy.txt");
+        File file = new File("src\\dane\\filmy.txt");
         try {
             Scanner in = new Scanner(file);
             in.nextLine();
@@ -74,7 +74,9 @@ public class WyswietlListeFilmow extends  Thread{
     }
 
 
-    public WyswietlListeFilmow(){
+    public WyswietlListeFilmow(String login){
+
+        this.login = login;
         //naprawic wyswietlanie
         final JFrame frame = new JFrame(); //frame
 
@@ -119,9 +121,14 @@ public class WyswietlListeFilmow extends  Thread{
                 String godzinaFilmu = wybrany.get(1);
                 String dataFilmu = wybrany.get(2);
                 nazwaPliku = nazwaFilmu +  dataFilmu + godzinaFilmu + ".txt";
+                ArrayList<String> daneFilmu = new ArrayList<>();
+                daneFilmu.add(nazwaFilmu);
+                daneFilmu.add(dataFilmu);
+                daneFilmu.add(godzinaFilmu);
+                System.out.println(daneFilmu);
                 nazwaPliku = nazwaPliku.replaceAll("\\s+", "");
                 System.out.println(nazwaPliku);
-                new SalaKinowa("src\\dane\\filmy_sale\\"+nazwaPliku);
+                new SalaKinowa("src\\dane\\filmy_sale\\"+nazwaPliku, login, daneFilmu);
                 frame.dispose();
             }
         });
@@ -136,7 +143,7 @@ public class WyswietlListeFilmow extends  Thread{
         wyjdz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-              //  new KlientMenuGlGUI();
+                new KlientMenuGlGUI(login);
                 frame.dispose();
             }
         });
@@ -183,6 +190,7 @@ public class WyswietlListeFilmow extends  Thread{
     }
 
     public static void main(String[] args) {
-        new WyswietlListeFilmow();
+        String login = "test";
+        new WyswietlListeFilmow(login);
     }
 }

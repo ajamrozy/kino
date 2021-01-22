@@ -1,5 +1,6 @@
 package GUI;
 
+import all.RezerwacjeKlienta;
 import all.WyswietlListeFilmow;
 import podstawowe.*;
 
@@ -25,20 +26,21 @@ public class KlientMenuGlGUI{
         frameKlientMenu.pack();
         frameKlientMenu.setVisible(true);
 
-        login = nazwaKlientMenuGlGui.getText();
-        System.out.println(login);
+//        login = nazwaKlientMenuGlGui.getText();
+//        System.out.println(login);
 
         kupBiletButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new WyswietlListeFilmow();
+                new WyswietlListeFilmow(login);
                 frameKlientMenu.dispose();
             }
         });
         wyświetlMojeRezerwacjeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                new RezerwacjeKlienta(login);
+                frameKlientMenu.dispose();
             }
         });
         wylogujButton.addActionListener(new ActionListener() {
