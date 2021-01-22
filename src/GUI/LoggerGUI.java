@@ -67,7 +67,7 @@ public class LoggerGUI{
                 String mess = "";
                 if(check == 1){
                     JOptionPane.showMessageDialog(null, "Zalogowano pomyślnie jako pracownik!", "Logger", JOptionPane.PLAIN_MESSAGE);
-                    new PracownikMenuGlGUI();
+                    new PracownikMenuGlGUI(textLogin.getText());
                     frameLogger.dispose();
                 }
                 else if(check == 2){

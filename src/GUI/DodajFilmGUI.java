@@ -34,27 +34,29 @@ public class DodajFilmGUI {
     private LocalDate fourDays = today.plus(4, ChronoUnit.DAYS);
     private LocalDate fiveDays = today.plus(5, ChronoUnit.DAYS);
     private LocalDate sixDays = today.plus(6, ChronoUnit.DAYS);
+    String login;
 
 
-    public DodajFilmGUI() {
+    public DodajFilmGUI(String login) {
         frame = new JFrame("DodajFilmGUI");
         frame.add(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+        this.login = login;
         dodajButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println(ktoreCheckboxWcisniete());
                 ArrayList<String> listaH = ktoreCheckboxWcisniete();
-                if (listaH.size() > 0){
+                if (!nameFilmTx.getText().equals("") && !rokProdukcjiTx.getText().equals("") && !gatunekTx.getText().equals("") && !opisTx.equals("") && listaH.size() > 0) {
                     File plik1 = new File("src\\dane\\filmy.txt");
                     try {
                         Writer out = new BufferedWriter(new FileWriter(plik1, true));
                         for (int i = 0; i < listaH.size(); i++) {
                             String dane = nameFilmTx.getText() + ", " + gatunekTx.getText() + ", " + rokProdukcjiTx.getText() + ", " + opisTx.getText() + ", " + listaH.get(i) + ", " + comboBox1.getSelectedItem();
                             generujSale(i);
-                            out.append("\n"+dane);
+                            out.append("\n" + dane);
                         }
                         out.close();
                     } catch (FileNotFoundException fileNotFoundException) {
@@ -63,13 +65,16 @@ public class DodajFilmGUI {
                         e.printStackTrace();
                     }
 
+
                 }
+                else
+                    JOptionPane.showMessageDialog(null, "wszystkie pola muszą być wypełnione", "DodajKlientaGUI", JOptionPane.PLAIN_MESSAGE);
             }
         });
         anulujButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new PracownikMenuGlGUI();
+                new PracownikMenuGlGUI(login);
                 frame.dispose();
             }
         });
@@ -142,7 +147,7 @@ public class DodajFilmGUI {
     }
 
     public static void main(String[] args) {
-        new DodajFilmGUI();
+        new DodajFilmGUI("test");
 
     }
 }

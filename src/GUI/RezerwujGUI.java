@@ -121,9 +121,7 @@ public class RezerwujGUI extends Thread {
                 listaStanuMiejscStr.add(line2);
             }
             input.close();
-            // display the original file for debugging
 
-            // logic to replace lines in the string (could use regex here to be generic)
             for (ArrayList<String> testZmienna : stanMiejscZmienione) {
                 String tymczasowyX = testZmienna.get(0);
                 String tymczasowyY = testZmienna.get(1);

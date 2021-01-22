@@ -14,20 +14,23 @@ public class PracownikMenuGlGUI {
     private JButton usuńFilmButton;
     private JButton wyświetlListęRezerwacjiButton;
     private JButton wylogujButton;
+    String login;
 
-   // Pracownik pracownik = new Pracownik("aaaaa", 13D);
-    public PracownikMenuGlGUI() {
+    public PracownikMenuGlGUI(String login) {
         framePracownikMenu = new JFrame("PracownikMenuGlGUI");
         framePracownikMenu.add(panel1);
         framePracownikMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         framePracownikMenu.pack();
         framePracownikMenu.setVisible(true);
 
+        this.login = login;
+        nameTx.setText(login);
+
         dodajFilmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 framePracownikMenu.dispose();
-                new DodajFilmGUI();
+                new DodajFilmGUI(login);
             }
         });
         usuńFilmButton.addActionListener(new ActionListener() {
@@ -54,6 +57,6 @@ public class PracownikMenuGlGUI {
     }
 
     public static void main(String[] args) {
-        new PracownikMenuGlGUI();
+        new PracownikMenuGlGUI("test");
     }
 }

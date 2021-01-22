@@ -1,7 +1,7 @@
 wiersz,columna,stan
 0,0,FALSE
 0,1,FALSE
-0,2,TRUE
+0,2,FALSE
 0,3,FALSE
 0,4,FALSE
 0,5,FALSE

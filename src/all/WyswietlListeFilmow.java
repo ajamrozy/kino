@@ -31,7 +31,8 @@ public class WyswietlListeFilmow extends  Thread{
             }
         };
         ArrayList<Boolean> test = new ArrayList<>();
-        File file = new File("src\\dane\\filmy.txt");
+//        File file = new File("src\\dane\\filmy.txt");
+        File file = new File("src/dane/filmy.txt");
         try {
             Scanner in = new Scanner(file);
             in.nextLine();

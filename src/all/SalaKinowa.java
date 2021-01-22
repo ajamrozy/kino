@@ -43,7 +43,8 @@ public class SalaKinowa {
                 if (zaznaczone.size() - wczytajIleZaznaczonych() != 0) {
                     RezerwujGUI nowy = new RezerwujGUI(zaznaczone, filename);
                     nowy.setIleBiletow(zaznaczone.size() - wczytajIleZaznaczonych());
-
+                    if (zaznaczone.size() - wczytajIleZaznaczonych() > 10)
+                        JOptionPane.showMessageDialog(null, "pamiętaj, że możesz kupić tylko 9 miejsc jednego rodzaju \n tj. 9 ulgowych i 9 normalnych", "Sala Kinowa", JOptionPane.PLAIN_MESSAGE);
 
                 }
                 else
@@ -57,7 +58,7 @@ public class SalaKinowa {
                 frame.dispose();
             }
         });
-        //NIC TU NIE DZIALA JAK NALEZY
+
         //add
 
 //        panel0.add(panel1);
@@ -67,13 +68,11 @@ public class SalaKinowa {
         panel2.add(zatwierdz);
         panel2.add(anuluj);
 
-
         frame.add(panel2);
         frame.add(panel1);
 //        frame.add(sp);
 
         //sety
-
         frame.setSize(500, 400);
         panel1.setSize(500, 50);
         panel2.setSize(500, 100);
@@ -82,24 +81,16 @@ public class SalaKinowa {
 
         table.setBounds(0, 0, 500, 50);
         //sp.setBounds(0,0,50,50);
+
         panel1.setLocation(0,0);
         panel2.setLocation(0, 301);
         anuluj.setLocation(0, 301);
         zatwierdz.setLocation(100, 301);
         frame.setResizable(false);
 
-
-//        System.out.println(panel2.getLocation());
-//        System.out.println(anuluj.getLocation());
-//        System.out.println();
-        //table.setLocation(100, 300);
-//        panel2.setLocation(0, 0);
-
-
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //zle wyswietlanie
     }
 
 
@@ -196,7 +187,7 @@ public class SalaKinowa {
 
     public void wpiszDoPlikuStanMiejsc(ArrayList<ArrayList<String>> stanMiejscZmienione) {
         try {
-            // input the file content to the StringBuffer "input"
+
             File file = new File(filename);
             Scanner input = new Scanner(file);
             ArrayList<String[]> listaStanuMiejscStr = new ArrayList<>();
@@ -208,9 +199,7 @@ public class SalaKinowa {
                 listaStanuMiejscStr.add(line2);
             }
             input.close();
-            // display the original file for debugging
 
-            // logic to replace lines in the string (could use regex here to be generic)
             for (ArrayList<String> testZmienna : stanMiejscZmienione) {
                 String tymczasowyX = testZmienna.get(0);
                 String tymczasowyY = testZmienna.get(1);
